@@ -1,0 +1,36 @@
+.property-list {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.125rem;
+  z-index: 1;
+}
+
+.property-list-item{
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    flex: 1;
+}
+
+.property-list-item-img{
+    width: 100%;
+    height: 9.625rem;
+    object-fit: cover;
+}
+
+.property-list-item-title{
+    bottom: 1.1rem;
+    left: 1.1rem;
+}
+
+.property-list-item-title h1{
+    font-size: 18px;
+}
+
+.property-list-item-title h2{
+    font-size: 14px;
+    font-weight: 500;
+}
+
