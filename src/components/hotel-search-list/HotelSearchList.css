@@ -1,0 +1,109 @@
+.hotel-search-list{
+  border: 1px solid lightgray;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.hotel-search-list-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotel-search-list-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 2;
+}
+
+.hotel-search-list-title {
+  font-size: 20px;
+  color: #0071c2;
+}
+
+.hotel-search-list-distance {
+  font-size: 12px;
+}
+
+.hotel-search-list-taxiOp {
+  font-size: 12px;
+  background-color: #008009;
+  color: white;
+  width: max-content;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.hotel-search-list-subtitle{
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hotel-search-list-features{
+  font-size: 12px;
+}
+
+.hotel-search-list-CancelOp{
+  font-size: 12px;
+  color: #008009;
+  font-weight: bold;
+}
+
+.hotel-search-list-cancelOpSubtitle{
+  font-size: 12px;
+  color: #008009;
+}
+
+.hotel-search-list-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+.hotel-search-list-rating{
+  display: flex;
+  justify-content: space-between
+}
+
+.hotel-search-list-rating span{
+  font-weight: 500;
+}
+.hotel-search-list-rating button{
+ background-color: #003580;
+ color: white;
+ padding: 5px;
+ font-weight: bold;
+ border: none;
+}
+
+.hotel-search-list-details{
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hotel-search-list-price{
+  font-size: 24px;
+}
+
+.hotel-search-list-tax{
+  font-size: 12px;
+  color: gray;
+}
+
+.hotel-search-list-check-button{
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  padding: 10px 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

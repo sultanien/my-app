@@ -16,7 +16,9 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 const Header = ({type}) => {
+  const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -33,6 +35,8 @@ const Header = ({type}) => {
     room: 1,
   });
 
+  const navigate = useNavigate()
+
   function handleOptions(name, operation) {
     setOptions((prev) => {
       return {
@@ -43,9 +47,19 @@ const Header = ({type}) => {
     });
   }
 
+  function handleSearch(){
+    navigate("/hotels", {state:{ destination, date, options }})
+  }
+
   return (
     <div className="header">
-      <div className={type === "list" ? "header-container list-mode" : "header-container"}>
+      <div
+        className={
+          type === "hotels-search-page"
+            ? "header-container list-mode"
+            : "header-container"
+        }
+      >
         <div className="header-container-list">
           <div className="header-container-list-item active">
             <FontAwesomeIcon icon={faBed} />
@@ -68,7 +82,7 @@ const Header = ({type}) => {
             <span> Airport Taxis</span>
           </div>
         </div>
-        {type !== "list" && (
+        {type !== "hotels-search-page" && (
           <div>
             <h1 className="header--title">Sign in, save money</h1>
             <p className="header--description">
@@ -86,6 +100,7 @@ const Header = ({type}) => {
                   type="text"
                   placeholder="Where are you going?"
                   className="header--searchbar-input"
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
               <div className="header--searchbar-item">
@@ -107,6 +122,7 @@ const Header = ({type}) => {
                   <DateRange
                     editableDateInputs={true}
                     onChange={(item) => setDate([item.selection])}
+                    minDate={new Date()}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="header--searchbar-date-range"
@@ -205,7 +221,9 @@ const Header = ({type}) => {
                 )}
               </div>
               <div className="header--searchbar-item">
-                <button className="header--button">Search</button>
+                <button className="header--button" onClick={handleSearch}>
+                  Search
+                </button>
               </div>
             </div>
           </div>
