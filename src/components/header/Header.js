@@ -1,7 +1,7 @@
 /** @format */
 
 import "./Header.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -17,10 +17,12 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../Context/SearchContext";
+import { AuthContext } from "../../Context/AuthContext";
 const Header = ({type}) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -36,6 +38,7 @@ const Header = ({type}) => {
   });
 
   const navigate = useNavigate()
+  const { user } = useContext(AuthContext);
 
   function handleOptions(name, operation) {
     setOptions((prev) => {
@@ -47,8 +50,12 @@ const Header = ({type}) => {
     });
   }
 
+  const { dispatch } = useContext(SearchContext)
+
+
   function handleSearch(){
-    navigate("/hotels", {state:{ destination, date, options }})
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options }});
+    navigate("/hotels", {state:{ destination, dates, options }})
   }
 
   return (
@@ -89,7 +96,7 @@ const Header = ({type}) => {
               Save 10% or more at participating properties – just look for the
               blue Genius label.
             </p>
-            <button className="header--button">Sign in or register</button>
+            {!user && <button className="header--button">Sign in or register</button>}
             <div className="header--searchbar">
               <div className="header--searchbar-item">
                 <FontAwesomeIcon
@@ -115,16 +122,16 @@ const Header = ({type}) => {
                   }}
                   className="header--searchbar-item-span"
                 >
-                  {format(date[0].startDate, "dd/MM/yyyy")} —{" "}
-                  {format(date[0].endDate, "dd/MM/yyyy")}
+                  {format(dates[0].startDate, "dd/MM/yyyy")} —{" "}
+                  {format(dates[0].endDate, "dd/MM/yyyy")}
                 </span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     minDate={new Date()}
                     moveRangeOnFirstSelection={false}
-                    ranges={date}
+                    ranges={dates}
                     className="header--searchbar-date-range"
                   />
                 )}
