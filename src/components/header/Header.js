@@ -19,7 +19,7 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
 import { AuthContext } from "../../Context/AuthContext";
-const Header = ({type}) => {
+const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -37,25 +37,22 @@ const Header = ({type}) => {
     room: 1,
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   function handleOptions(name, operation) {
-    setOptions((prev) => {
-      return {
-        ...prev,
-        [name]:
-          operation === "increase" ? options[name] + 1 : options[name] - 1,
-      };
+    setOptions({
+      ...options,
+      [name]: operation === "increase" ? options[name] + 1 : options[name] - 1,
     });
   }
 
-  const { dispatch } = useContext(SearchContext)
+  
+  const { dispatch } = useContext(SearchContext);
 
-
-  function handleSearch(){
-    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options }});
-    navigate("/hotels", {state:{ destination, dates, options }})
+  function handleSearch() {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    navigate("/hotels", { state: { destination, dates, options } });
   }
 
   return (
@@ -96,7 +93,9 @@ const Header = ({type}) => {
               Save 10% or more at participating properties – just look for the
               blue Genius label.
             </p>
-            {!user && <button className="header--button">Sign in or register</button>}
+            {!user && (
+              <button className="header--button">Sign in or register</button>
+            )}
             <div className="header--searchbar">
               <div className="header--searchbar-item">
                 <FontAwesomeIcon

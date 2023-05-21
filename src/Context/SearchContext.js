@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   },
 };
 
-export const SearchContext = createContext(INITIAL_STATE);
+export const SearchContext = createContext({});
 
 const SearchReducer = (state, action) => {
   switch (action.type) {
@@ -27,7 +27,6 @@ const SearchReducer = (state, action) => {
 
 export const SearchContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
-
   return (
     <SearchContext.Provider
       value={{
